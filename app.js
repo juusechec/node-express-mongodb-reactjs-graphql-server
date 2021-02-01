@@ -7,12 +7,19 @@ var mongoose = require("mongoose");
 var graphqlHTTP = require("express-graphql");
 var schema = require("./graphql/savedOpportunitySchemas");
 var cors = require("cors");
+var uri = `mongodb+srv://${process.env.MONGO_USERNAME}:${process.env.MONGO_PASSWORD}@cluster0.ox1m3.mongodb.net/${process.env.PORT}?retryWrites=true&w=majority`;
 
 mongoose
-  .connect("mongodb://localhost/node-graphql", {
-    promiseLibrary: require("bluebird"),
-    useNewUrlParser: true,
-  })
+  .connect(
+    uri,
+    {
+      // promiseLibrary: require("bluebird"),
+      // useNewUrlParser: true,
+      useNewUrlParser: true,
+      useUnifiedTopology: true,
+      serverSelectionTimeoutMS: 5000,
+    }
+  )
   .then(() => console.log("connection successful"))
   .catch((err) => console.error(err));
 
