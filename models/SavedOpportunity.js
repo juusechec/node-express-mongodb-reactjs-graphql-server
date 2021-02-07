@@ -1,6 +1,6 @@
-var mongoose = require('mongoose');
+const mongoose = require('mongoose');
 
-var SavedOpportunitySchema = new mongoose.Schema({
+const SavedOpportunitySchema = new mongoose.Schema({
   id: String,
   id_user: String,
   id_opportunity: String,

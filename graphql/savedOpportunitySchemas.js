@@ -1,15 +1,15 @@
-var GraphQLSchema = require("graphql").GraphQLSchema;
-var GraphQLObjectType = require("graphql").GraphQLObjectType;
-var GraphQLList = require("graphql").GraphQLList;
-var GraphQLObjectType = require("graphql").GraphQLObjectType;
-var GraphQLNonNull = require("graphql").GraphQLNonNull;
-var GraphQLID = require("graphql").GraphQLID;
-var GraphQLString = require("graphql").GraphQLString;
-var GraphQLInt = require("graphql").GraphQLInt;
-var GraphQLDate = require("graphql-date");
-var SavedOpportunityModel = require("../models/SavedOpportunity");
+const GraphQLSchema = require("graphql").GraphQLSchema;
+const GraphQLObjectType = require("graphql").GraphQLObjectType;
+const GraphQLList = require("graphql").GraphQLList;
+const GraphQLObjectType = require("graphql").GraphQLObjectType;
+const GraphQLNonNull = require("graphql").GraphQLNonNull;
+const GraphQLID = require("graphql").GraphQLID;
+const GraphQLString = require("graphql").GraphQLString;
+const GraphQLInt = require("graphql").GraphQLInt;
+const GraphQLDate = require("graphql-date");
+const SavedOpportunityModel = require("../models/SavedOpportunity");
 
-var savedOpportunityType = new GraphQLObjectType({
+const savedOpportunityType = new GraphQLObjectType({
   name: "savedOpportunity",
   fields: function () {
     return {
@@ -32,7 +32,7 @@ var savedOpportunityType = new GraphQLObjectType({
   },
 });
 
-var queryType = new GraphQLObjectType({
+const queryType = new GraphQLObjectType({
   name: "Query",
   fields: function () {
     return {
@@ -68,7 +68,7 @@ var queryType = new GraphQLObjectType({
   },
 });
 
-var mutation = new GraphQLObjectType({
+const mutation = new GraphQLObjectType({
   name: "Mutation",
   fields: function () {
     return {

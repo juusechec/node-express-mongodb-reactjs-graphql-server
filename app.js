@@ -1,35 +1,33 @@
-var createError = require("http-errors");
-var express = require("express");
-var path = require("path");
-var cookieParser = require("cookie-parser");
-var logger = require("morgan");
-var mongoose = require("mongoose");
-var graphqlHTTP = require("express-graphql");
-var schema = require("./graphql/savedOpportunitySchemas");
-var cors = require("cors");
-var uri = `mongodb+srv://${process.env.MONGO_USERNAME}:${process.env.MONGO_PASSWORD}@cluster0.ox1m3.mongodb.net/${process.env.PORT}?retryWrites=true&w=majority`;
+const createError = require("http-errors");
+const express = require("express");
+const path = require("path");
+const cookieParser = require("cookie-parser");
+const logger = require("morgan");
+const mongoose = require("mongoose");
+const graphqlHTTP = require("express-graphql");
+const schema = require("./graphql/savedOpportunitySchemas");
+const cors = require("cors");
+const config = require("./config");
+
+const mongoUri = `mongodb+srv://${config.mongoUsername}:${config.mongoPassword}@${config.mongoHost}/${config.mongoDb}?retryWrites=true&w=majority`;
 
 mongoose
-  .connect(
-    uri,
-    {
-      // promiseLibrary: require("bluebird"),
-      // useNewUrlParser: true,
-      useNewUrlParser: true,
-      useUnifiedTopology: true,
-      serverSelectionTimeoutMS: 5000,
-    }
-  )
+  .connect(mongoUri, {
+    // promiseLibrary: require("bluebird"),
+    // useNewUrlParser: true,
+    useNewUrlParser: true,
+    useUnifiedTopology: true,
+    serverSelectionTimeoutMS: 5000,
+  })
   .then(() => console.log("connection successful"))
   .catch((err) => console.error(err));
 
-var bioRouter = require("./routes/bio");
-var indexRouter = require("./routes/index");
-var usersRouter = require("./routes/users");
-var proxyRouter = require("./routes/proxy");
-var extractRouter = require("./routes/extract");
+const bioRouter = require("./routes/bio");
+const indexRouter = require("./routes/index");
+const proxyRouter = require("./routes/proxy");
+const extractRouter = require("./routes/extract");
 
-var app = express();
+const app = express();
 
 // view engine setup
 app.set("views", path.join(__dirname, "views"));
@@ -42,7 +40,6 @@ app.use(cookieParser());
 app.use(express.static(path.join(__dirname, "public")));
 
 app.use("/", indexRouter);
-app.use("/users", usersRouter);
 app.use("*", cors());
 app.use(
   "/graphql",

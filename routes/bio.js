@@ -1,7 +1,7 @@
-var express = require("express");
-var router = express.Router();
+const express = require("express");
+const router = express.Router();
 const fetch = require("node-fetch");
-const { default: config } = require("../config");
+const config = require("../config");
 
 router.get("/", function (req, res, next) {
   const username = req.query.username;
