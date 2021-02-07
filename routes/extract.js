@@ -1,19 +1,18 @@
 var express = require("express");
 var router = express.Router();
 const fetch = require("node-fetch");
+const { default: config } = require("../config");
 
 router.post("/", function (req, res, next) {
-  const apiUrl = "https://monkeylearn.com/word-cloud/api/extract/";
+  const apiUrl = config.extractEndpoint;
   const body = req.body;
-  console.log("##############body", body);
+  console.log("req.body", body);
   fetch(apiUrl, {
     method: "POST",
     headers: {
       "Content-Type": "application/json",
-      Cookie:
-        "csrftoken=LwLnTOn367TWl5cUJeQZgpvbzTzXdNOQy6dQ7qRWFJlmuVynZQQYDPEKBQOBMuyg",
-      "X-CSRFTOKEN":
-        "LwLnTOn367TWl5cUJeQZgpvbzTzXdNOQy6dQ7qRWFJlmuVynZQQYDPEKBQOBMuyg",
+      Cookie: `csrftoken=${config.monkeylearnToken}`,
+      "X-CSRFTOKEN": `${config.monkeylearnToken}`,
     },
     body: JSON.stringify(body),
   })

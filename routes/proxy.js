@@ -1,10 +1,11 @@
 var express = require("express");
 var router = express.Router();
 const fetch = require("node-fetch");
+const { default: config } = require("../config");
 
 router.post("/post/*", function (req, res, next) {
   const path = req.url.replace('/post', '');
-  const apiUrl = `https://search.torre.co${path}`;
+  const apiUrl = `${config.torreSearchEndpoint}${path}`;
   console.log('apiUrl', apiUrl);
   const body = req.body;
   fetch(apiUrl, {
