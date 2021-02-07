@@ -1,6 +1,11 @@
-# Deploy
-Deploy to gh-pages
+# install and start
 ```sh
-npm run predeploy
-npm run deploy
+npm ci
+npm start
+```
+
+# deploy
+Deploy to Heroku
+```sh
+git push origin heroku
 ```
